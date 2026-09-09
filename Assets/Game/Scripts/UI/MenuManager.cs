@@ -36,8 +36,8 @@ public class MenuManager : MonoBehaviour
     Button ReturnToMMButton;
     GameObject EasyDifficultyButtonGameObject;
     Button EasyDifficultyButton;
-    GameObject MediumDifficultyButtonGameObject;
-    Button MediumDifficultyButton;
+    GameObject NormalDifficultyButtonGameObject;
+    Button NormalDifficultyButton;
     GameObject HardDifficultyButtonGameObject;
     Button HardDifficultyButton;
     GameObject PlayerBattleBotType1ButtonGameObject;
@@ -50,6 +50,21 @@ public class MenuManager : MonoBehaviour
     Button PlayerBattleBotType4Button;
     GameObject StartBattleButtonGameObject;
     Button StartBattleButton;
+    GameObject OutlineEasyDifficultyButtonGameObject;
+    Image OutlineEasyDifficultyButtonImage;
+    GameObject OutlineNormalDifficultyButtonGameObject;
+    Image OutlineNormalDifficultyButtonImage;
+    GameObject OutlineHardDifficultyButtonGameObject;
+    Image OutlineHardDifficultyButtonImage;
+    GameObject OutlinePlayerBattleBotType1ButtonGameObject;
+    Image OutlinePlayerBattleBotType1ButtonImage;
+    GameObject OutlinePlayerBattleBotType2ButtonGameObject;
+    Image OutlinePlayerBattleBotType2ButtonImage;
+    GameObject OutlinePlayerBattleBotType3ButtonGameObject;
+    Image OutlinePlayerBattleBotType3ButtonImage;
+    GameObject OutlinePlayerBattleBotType4ButtonGameObject;
+    Image OutlinePlayerBattleBotType4ButtonImage;
+
 
     void Start()
     {
@@ -83,17 +98,38 @@ public class MenuManager : MonoBehaviour
         VSAIMenuCanvas = VersusAICanvasGameObject.GetComponent<Canvas>();
         ReturnToMMButtonGameObject = GameObject.Find("ReturnToMMButton");
         ReturnToMMButton = ReturnToMMButtonGameObject.GetComponent<Button>();
-        
+        EasyDifficultyButtonGameObject = GameObject.Find("DifficultyEasyButton");
+        EasyDifficultyButton = EasyDifficultyButtonGameObject.GetComponent<Button>();
+        NormalDifficultyButtonGameObject = GameObject.Find("DifficultyNormalButton");
+        NormalDifficultyButton = NormalDifficultyButtonGameObject.GetComponent<Button>();
+        HardDifficultyButtonGameObject = GameObject.Find("DifficultyHardButton");
+        HardDifficultyButton = HardDifficultyButtonGameObject.GetComponent<Button>();
+        PlayerBattleBotType1ButtonGameObject = GameObject.Find("BBot1Button");
+        PlayerBattleBotType1Button = PlayerBattleBotType1ButtonGameObject.GetComponent<Button>();
+        PlayerBattleBotType2ButtonGameObject = GameObject.Find("BBot2Button");
+        PlayerBattleBotType2Button = PlayerBattleBotType2ButtonGameObject.GetComponent<Button>();
+        PlayerBattleBotType3ButtonGameObject = GameObject.Find("BBot3Button");
+        PlayerBattleBotType3Button = PlayerBattleBotType3ButtonGameObject.GetComponent<Button>();
+        PlayerBattleBotType4ButtonGameObject = GameObject.Find("BBot4Button");
+        PlayerBattleBotType4Button = PlayerBattleBotType4ButtonGameObject.GetComponent<Button>();
+        StartBattleButtonGameObject = GameObject.Find("ToBattleButton");
+        StartBattleButton = StartBattleButtonGameObject.GetComponent<Button>();
+        //Versus AI Menu | Button outlines
+        OutlineEasyDifficultyButtonGameObject = GameObject.Find("DifficultyEasyOutline");
+        OutlineEasyDifficultyButtonImage = OutlineEasyDifficultyButtonGameObject.GetComponent<Image>();
+        OutlineNormalDifficultyButtonGameObject = GameObject.Find("DifficultyNormalOutline");
+        OutlineNormalDifficultyButtonImage = OutlineNormalDifficultyButtonGameObject.GetComponent<Image>();
+        OutlineHardDifficultyButtonGameObject = GameObject.Find("DifficultyHardOutline");
+        OutlineHardDifficultyButtonImage = OutlineHardDifficultyButtonGameObject.GetComponent<Image>();
+        OutlinePlayerBattleBotType1ButtonGameObject = GameObject.Find("BBot1Outline");
+        OutlinePlayerBattleBotType1ButtonImage = OutlinePlayerBattleBotType1ButtonGameObject.GetComponent<Image>();
+        OutlinePlayerBattleBotType2ButtonGameObject = GameObject.Find("BBot2Outline");
+        OutlinePlayerBattleBotType2ButtonImage = OutlinePlayerBattleBotType2ButtonGameObject.GetComponent<Image>();
+        OutlinePlayerBattleBotType3ButtonGameObject = GameObject.Find("BBot3Outline");
+        OutlinePlayerBattleBotType3ButtonImage = OutlinePlayerBattleBotType3ButtonGameObject.GetComponent<Image>();
+        OutlinePlayerBattleBotType4ButtonGameObject = GameObject.Find("BBot4Outline");
+        OutlinePlayerBattleBotType4ButtonImage = OutlinePlayerBattleBotType4ButtonGameObject.GetComponent<Image>();
 
-
-
-        
-        
-        
-        
-        
-        
-        
         
 
 
