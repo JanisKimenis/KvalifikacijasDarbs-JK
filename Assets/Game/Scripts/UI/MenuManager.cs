@@ -3,7 +3,8 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {   
-
+    //UISelectToGameVersusAI script Instance;
+    UISelectToGameVersusAI UISelectToGameVersusAIVar;
 
     //Main/first menu
     GameObject mainMenuCanvasObject;
@@ -68,8 +69,12 @@ public class MenuManager : MonoBehaviour
 
     void Start()
     {
+
+        //UISelectToGameVersusAI script Instance
+        UISelectToGameVersusAIVar = GameObject.Find("MainManager").GetComponent<UISelectToGameVersusAI>();
+
         //Main/First menu
-        mainMenuCanvasObject = GameObject.Find("StartMenuCanvas"); 
+        mainMenuCanvasObject = GameObject.Find("StartMenuCanvas");
         mainMenuCanvas = mainMenuCanvasObject.GetComponent<Canvas>();
 
         BGPanelGameObject = mainMenuCanvasObject.transform.Find("BGPanel").gameObject;
@@ -148,6 +153,11 @@ public class MenuManager : MonoBehaviour
         //Switch between main menu and Versus AI menu
         ReturnToMMButton.onClick.AddListener(() => SwitchCanvas(VSAIMenuCanvas, mainMenuCanvas));
         VersusAIButton.onClick.AddListener(() => SwitchCanvas(mainMenuCanvas, VSAIMenuCanvas));
+
+        //Versus AI menu | Difficulty selection
+        EasyDifficultyButton.onClick.AddListener(() => { OutlineEasyDifficultyButtonImage.enabled = true; OutlineNormalDifficultyButtonImage.enabled = false; OutlineHardDifficultyButtonImage.enabled = false; UISelectToGameVersusAIVar.OnDifficultyButtonClicked(0);});
+        NormalDifficultyButton.onClick.AddListener(() => { OutlineEasyDifficultyButtonImage.enabled = false; OutlineNormalDifficultyButtonImage.enabled = true; OutlineHardDifficultyButtonImage.enabled = false; UISelectToGameVersusAIVar.OnDifficultyButtonClicked(1);});
+        HardDifficultyButton.onClick.AddListener(() => { OutlineEasyDifficultyButtonImage.enabled = false; OutlineNormalDifficultyButtonImage.enabled = false; OutlineHardDifficultyButtonImage.enabled = true; UISelectToGameVersusAIVar.OnDifficultyButtonClicked(2);});
     }
     void SwitchCanvas(Canvas aCanvas, Canvas bCanvas)
     {

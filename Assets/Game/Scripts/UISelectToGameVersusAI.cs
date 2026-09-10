@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public class UISelectToGameVersusAI : MonoBehaviour
 {
 
-    public enum Difficulty { Easy, Normal, Hard}
-    public enum BattleBotType { Mage1, Mage2, Explo1, Explo2 }
+    public enum Difficulty { Easy = 0, Normal = 1, Hard = 2 }
+    public enum BattleBotType { Mage1 = 0, Mage2 = 1, Explo1 = 2, Explo2 = 3 }
     public Difficulty selectedDifficulty;
     public BattleBotType playerSelectedBattleBotType;
     public BattleBotType enemySelectedBattleBotType;
@@ -23,17 +23,17 @@ public class UISelectToGameVersusAI : MonoBehaviour
     {
         
     }
-    void OnDifficultyButtonClicked(int difficultyIndex)
+    public void OnDifficultyButtonClicked(int difficultyIndex)
     {
         selectedDifficulty = (Difficulty)difficultyIndex;
         Debug.Log("Selected Difficulty: " + selectedDifficulty);
     }
-    void OnPlayerBattleBotButtonClicked(int battleBotIndex)
+    public void OnPlayerBattleBotButtonClicked(int battleBotIndex)
     {
         playerSelectedBattleBotType = (BattleBotType)battleBotIndex;
         Debug.Log("Player Selected Battle Bot: " + playerSelectedBattleBotType);
     }
-    void GetEnemyBattleBotType()
+    public void GetEnemyBattleBotType()
     {
         // Randomly select an enemy Battle Bot type
         if (playerSelectedBattleBotType == BattleBotType.Mage1 || playerSelectedBattleBotType == BattleBotType.Mage2)
