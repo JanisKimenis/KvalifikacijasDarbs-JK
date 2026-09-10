@@ -70,7 +70,7 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
 
-        //UISelectToGameVersusAI script Instance
+        //UISelectToGameVersusAI Script Instance
         UISelectToGameVersusAIVar = GameObject.Find("MainManager").GetComponent<UISelectToGameVersusAI>();
 
         //Main/First menu
@@ -155,9 +155,81 @@ public class MenuManager : MonoBehaviour
         VersusAIButton.onClick.AddListener(() => SwitchCanvas(mainMenuCanvas, VSAIMenuCanvas));
 
         //Versus AI menu | Difficulty selection
-        EasyDifficultyButton.onClick.AddListener(() => { OutlineEasyDifficultyButtonImage.enabled = true; OutlineNormalDifficultyButtonImage.enabled = false; OutlineHardDifficultyButtonImage.enabled = false; UISelectToGameVersusAIVar.OnDifficultyButtonClicked(0);});
-        NormalDifficultyButton.onClick.AddListener(() => { OutlineEasyDifficultyButtonImage.enabled = false; OutlineNormalDifficultyButtonImage.enabled = true; OutlineHardDifficultyButtonImage.enabled = false; UISelectToGameVersusAIVar.OnDifficultyButtonClicked(1);});
-        HardDifficultyButton.onClick.AddListener(() => { OutlineEasyDifficultyButtonImage.enabled = false; OutlineNormalDifficultyButtonImage.enabled = false; OutlineHardDifficultyButtonImage.enabled = true; UISelectToGameVersusAIVar.OnDifficultyButtonClicked(2);});
+        EasyDifficultyButton.onClick.AddListener(() => 
+        { 
+            if (UISelectToGameVersusAIVar.selectedDifficulty != UISelectToGameVersusAI.Difficulty.Easy)
+            {
+            OutlineEasyDifficultyButtonImage.enabled = true; 
+            OutlineNormalDifficultyButtonImage.enabled = false; 
+            OutlineHardDifficultyButtonImage.enabled = false; 
+            UISelectToGameVersusAIVar.OnDifficultyButtonClicked(0);
+            }
+        }
+        );
+
+        NormalDifficultyButton.onClick.AddListener(() => 
+        { 
+            if (UISelectToGameVersusAIVar.selectedDifficulty != UISelectToGameVersusAI.Difficulty.Normal)
+            {
+                OutlineEasyDifficultyButtonImage.enabled = false; 
+                OutlineNormalDifficultyButtonImage.enabled = true; 
+                OutlineHardDifficultyButtonImage.enabled = false; 
+                UISelectToGameVersusAIVar.OnDifficultyButtonClicked(1);
+            }
+        }
+        );
+        HardDifficultyButton.onClick.AddListener(() => 
+        { 
+            if (UISelectToGameVersusAIVar.selectedDifficulty != UISelectToGameVersusAI.Difficulty.Hard)
+            {
+                OutlineEasyDifficultyButtonImage.enabled = false; 
+                OutlineNormalDifficultyButtonImage.enabled = false; 
+                OutlineHardDifficultyButtonImage.enabled = true; 
+                UISelectToGameVersusAIVar.OnDifficultyButtonClicked(2);
+            }
+        });
+
+        //Versus AI menu | Battle-bot selection
+        PlayerBattleBotType1Button.onClick.AddListener(() => { 
+            if (UISelectToGameVersusAIVar.playerSelectedBattleBotType != UISelectToGameVersusAI.BattleBotType.Explo1)
+            {
+                OutlinePlayerBattleBotType1ButtonImage.enabled = true; 
+                OutlinePlayerBattleBotType2ButtonImage.enabled = false; 
+                OutlinePlayerBattleBotType3ButtonImage.enabled = false; 
+                OutlinePlayerBattleBotType4ButtonImage.enabled = false; 
+                UISelectToGameVersusAIVar.OnPlayerBattleBotButtonClicked(0);
+            }
+        });
+        PlayerBattleBotType2Button.onClick.AddListener(() => { 
+            if (UISelectToGameVersusAIVar.playerSelectedBattleBotType != UISelectToGameVersusAI.BattleBotType.Explo2)
+            {
+                OutlinePlayerBattleBotType1ButtonImage.enabled = false; 
+                OutlinePlayerBattleBotType2ButtonImage.enabled = true; 
+                OutlinePlayerBattleBotType3ButtonImage.enabled = false; 
+                OutlinePlayerBattleBotType4ButtonImage.enabled = false; 
+                UISelectToGameVersusAIVar.OnPlayerBattleBotButtonClicked(1);
+            }
+        });
+        PlayerBattleBotType3Button.onClick.AddListener(() => { 
+            if (UISelectToGameVersusAIVar.playerSelectedBattleBotType != UISelectToGameVersusAI.BattleBotType.Mage1)
+            {
+                OutlinePlayerBattleBotType1ButtonImage.enabled = false; 
+                OutlinePlayerBattleBotType2ButtonImage.enabled = false; 
+                OutlinePlayerBattleBotType3ButtonImage.enabled = true; 
+                OutlinePlayerBattleBotType4ButtonImage.enabled = false; 
+                UISelectToGameVersusAIVar.OnPlayerBattleBotButtonClicked(2);
+            }
+        });
+        PlayerBattleBotType4Button.onClick.AddListener(() => { 
+            if (UISelectToGameVersusAIVar.playerSelectedBattleBotType != UISelectToGameVersusAI.BattleBotType.Mage2)
+            {
+                OutlinePlayerBattleBotType1ButtonImage.enabled = false; 
+                OutlinePlayerBattleBotType2ButtonImage.enabled = false; 
+                OutlinePlayerBattleBotType3ButtonImage.enabled = false; 
+                OutlinePlayerBattleBotType4ButtonImage.enabled = true; 
+                UISelectToGameVersusAIVar.OnPlayerBattleBotButtonClicked(3);
+            }
+        });
     }
     void SwitchCanvas(Canvas aCanvas, Canvas bCanvas)
     {

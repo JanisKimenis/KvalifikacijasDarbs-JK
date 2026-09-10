@@ -6,7 +6,7 @@ public class UISelectToGameVersusAI : MonoBehaviour
 {
 
     public enum Difficulty { Easy = 0, Normal = 1, Hard = 2 }
-    public enum BattleBotType { Mage1 = 0, Mage2 = 1, Explo1 = 2, Explo2 = 3 }
+    public enum BattleBotType { None = -1, Explo1 = 0, Explo2 = 1, Mage1 = 2, Mage2 = 3 }
     public Difficulty selectedDifficulty;
     public BattleBotType playerSelectedBattleBotType;
     public BattleBotType enemySelectedBattleBotType;
@@ -16,6 +16,7 @@ public class UISelectToGameVersusAI : MonoBehaviour
     void Start()
     {
         selectedDifficulty = Difficulty.Normal; // Set default difficulty
+        playerSelectedBattleBotType = BattleBotType.None; // Set default player Battle Bot type
     }
 
     // Update is called once per frame
