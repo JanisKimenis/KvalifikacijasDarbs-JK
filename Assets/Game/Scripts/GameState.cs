@@ -9,12 +9,15 @@ public class GameState : MonoBehaviour
 
     public enum gameState
     {
-        inMainMenu,
-        inCountdown,
-        inBattle,
-        inUpgrades
+        inMainMenu = 0,
+        inCountdown = 1,
+        inBattle = 2,
+        inUpgrades = 3
 
     }
-
+    public void ChangeGameState(int newGameStateIndex)
+    {
+        currentGameState = (gameState)newGameStateIndex;
+    }
 
 }

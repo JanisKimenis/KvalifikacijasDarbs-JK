@@ -1,8 +1,14 @@
+using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {   
+    //Main Manager
+    GameObject mainManagerGameObject;
+    // GameState script Instance;
+    GameState gameStateVar;
+
     //UISelectToGameVersusAI script Instance;
     UISelectToGameVersusAI UISelectToGameVersusAIVar;
 
@@ -49,6 +55,8 @@ public class MenuManager : MonoBehaviour
     Button PlayerBattleBotType3Button;
     GameObject PlayerBattleBotType4ButtonGameObject;
     Button PlayerBattleBotType4Button;
+    GameObject PlayerBattleBotTypeRandButtonGameObject;
+    Button PlayerBattleBotTypeRandButton;
     GameObject StartBattleButtonGameObject;
     Button StartBattleButton;
     GameObject OutlineEasyDifficultyButtonGameObject;
@@ -65,13 +73,21 @@ public class MenuManager : MonoBehaviour
     Image OutlinePlayerBattleBotType3ButtonImage;
     GameObject OutlinePlayerBattleBotType4ButtonGameObject;
     Image OutlinePlayerBattleBotType4ButtonImage;
+    GameObject OutlinePlayerBattleBotTypeRandButtonGameObject;
+    Image OutlinePlayerBattleBotTypeRandButtonImage;
+    
 
 
     void Start()
     {
+        //Main manager game object
+        mainManagerGameObject = GameObject.Find("MainManager");
 
         //UISelectToGameVersusAI Script Instance
-        UISelectToGameVersusAIVar = GameObject.Find("MainManager").GetComponent<UISelectToGameVersusAI>();
+        UISelectToGameVersusAIVar = mainManagerGameObject.GetComponent<UISelectToGameVersusAI>();
+
+        //GameState Script Instance
+        gameStateVar = mainManagerGameObject.GetComponent<GameState>();
 
         //Main/First menu
         mainMenuCanvasObject = GameObject.Find("StartMenuCanvas");
@@ -117,6 +133,8 @@ public class MenuManager : MonoBehaviour
         PlayerBattleBotType3Button = PlayerBattleBotType3ButtonGameObject.GetComponent<Button>();
         PlayerBattleBotType4ButtonGameObject = GameObject.Find("BBot4Button");
         PlayerBattleBotType4Button = PlayerBattleBotType4ButtonGameObject.GetComponent<Button>();
+        PlayerBattleBotTypeRandButtonGameObject = GameObject.Find("BBotRandButton");
+        PlayerBattleBotTypeRandButton = PlayerBattleBotTypeRandButtonGameObject.GetComponent<Button>();
         StartBattleButtonGameObject = GameObject.Find("ToBattleButton");
         StartBattleButton = StartBattleButtonGameObject.GetComponent<Button>();
         //Versus AI Menu | Button outlines
@@ -134,15 +152,16 @@ public class MenuManager : MonoBehaviour
         OutlinePlayerBattleBotType3ButtonImage = OutlinePlayerBattleBotType3ButtonGameObject.GetComponent<Image>();
         OutlinePlayerBattleBotType4ButtonGameObject = GameObject.Find("BBot4Outline");
         OutlinePlayerBattleBotType4ButtonImage = OutlinePlayerBattleBotType4ButtonGameObject.GetComponent<Image>();
-
+        OutlinePlayerBattleBotTypeRandButtonGameObject = GameObject.Find("BBotRandOutline");
+        OutlinePlayerBattleBotTypeRandButtonImage = OutlinePlayerBattleBotTypeRandButtonGameObject.GetComponent<Image>();
         
 
 
         //Event listeners
         //Swap between Play selection buttons and main menu buttons
-        PlayButton.onClick.AddListener(() => { VersusFriendsButtonGameObject.SetActive(true); ExitButtonGameObject.SetActive(false); StoryModeGameObject.SetActive(true); WIPOverlayGameObject.SetActive(true); VersusAIButtonGameObject.SetActive(true); BackButtonGameObject.SetActive(true); PlayButtonGameObject.SetActive(false); SettingsButtonGameObject.SetActive(false); BackButtonGameObject.SetActive(true); });
-        BackButton.onClick.AddListener(() => { VersusFriendsButtonGameObject.SetActive(false); ExitButtonGameObject.SetActive(true); StoryModeGameObject.SetActive(false); WIPOverlayGameObject.SetActive(false); VersusAIButtonGameObject.SetActive(false); BackButtonGameObject.SetActive(false); PlayButtonGameObject.SetActive(true); SettingsButtonGameObject.SetActive(true); BackButtonGameObject.SetActive(false); });
-        
+        PlayButton.onClick.AddListener(() => PlayButtonMenuSwap());
+        BackButton.onClick.AddListener(() => BackPlayButtonMenuSwap());
+
         //Settings open/close (In main menu)
         SettingsExitButton.onClick.AddListener(() => SettingsOverlay.SetActive(false));
         SettingsButton.onClick.AddListener(() => SettingsOverlay.SetActive(true));
@@ -197,6 +216,7 @@ public class MenuManager : MonoBehaviour
                 OutlinePlayerBattleBotType2ButtonImage.enabled = false; 
                 OutlinePlayerBattleBotType3ButtonImage.enabled = false; 
                 OutlinePlayerBattleBotType4ButtonImage.enabled = false; 
+                OutlinePlayerBattleBotTypeRandButtonImage.enabled = false;
                 UISelectToGameVersusAIVar.OnPlayerBattleBotButtonClicked(0);
             }
         });
@@ -207,6 +227,7 @@ public class MenuManager : MonoBehaviour
                 OutlinePlayerBattleBotType2ButtonImage.enabled = true; 
                 OutlinePlayerBattleBotType3ButtonImage.enabled = false; 
                 OutlinePlayerBattleBotType4ButtonImage.enabled = false; 
+                OutlinePlayerBattleBotTypeRandButtonImage.enabled = false;
                 UISelectToGameVersusAIVar.OnPlayerBattleBotButtonClicked(1);
             }
         });
@@ -217,6 +238,7 @@ public class MenuManager : MonoBehaviour
                 OutlinePlayerBattleBotType2ButtonImage.enabled = false; 
                 OutlinePlayerBattleBotType3ButtonImage.enabled = true; 
                 OutlinePlayerBattleBotType4ButtonImage.enabled = false; 
+                OutlinePlayerBattleBotTypeRandButtonImage.enabled = false;
                 UISelectToGameVersusAIVar.OnPlayerBattleBotButtonClicked(2);
             }
         });
@@ -227,13 +249,75 @@ public class MenuManager : MonoBehaviour
                 OutlinePlayerBattleBotType2ButtonImage.enabled = false; 
                 OutlinePlayerBattleBotType3ButtonImage.enabled = false; 
                 OutlinePlayerBattleBotType4ButtonImage.enabled = true; 
+                OutlinePlayerBattleBotTypeRandButtonImage.enabled = false;
                 UISelectToGameVersusAIVar.OnPlayerBattleBotButtonClicked(3);
             }
+        });
+        PlayerBattleBotTypeRandButton.onClick.AddListener(() => { 
+            if (UISelectToGameVersusAIVar.playerSelectedBattleBotType != UISelectToGameVersusAI.BattleBotType.Random)
+            {
+                OutlinePlayerBattleBotType1ButtonImage.enabled = false; 
+                OutlinePlayerBattleBotType2ButtonImage.enabled = false; 
+                OutlinePlayerBattleBotType3ButtonImage.enabled = false; 
+                OutlinePlayerBattleBotType4ButtonImage.enabled = false; 
+                OutlinePlayerBattleBotTypeRandButtonImage.enabled = true;
+                UISelectToGameVersusAIVar.OnPlayerBattleBotButtonClicked(-1);
+            }
+        });
+        //Versus AI menu | Start battle button
+        StartBattleButton.onClick.AddListener(() => { 
+            if (UISelectToGameVersusAIVar.playerSelectedBattleBotType == UISelectToGameVersusAI.BattleBotType.Random)
+            {
+                UISelectToGameVersusAIVar.GetRandomPlayerBattleBotType();
+            }
+            UISelectToGameVersusAIVar.GetEnemyBattleBotType();
+            BackPlayButtonMenuSwap();
+            Debug.Log("Enemy Selected Battle Bot: " + UISelectToGameVersusAIVar.enemySelectedBattleBotType);
+            SwitchScene("InBattleScene", "MainMenu");
         });
     }
     void SwitchCanvas(Canvas aCanvas, Canvas bCanvas)
     {
         aCanvas.enabled = false;
         bCanvas.enabled = true;
+    }
+    //Loads scene, then waits for it to load, then sets it as the active scene, then unloads the previous scene
+    void SwitchScene(string sceneNameLoaded, string sceneNameUnloaded)
+    {
+        async void LoadSceneAndUnloadPrevious()
+        {
+            var loadOperation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneNameLoaded, UnityEngine.SceneManagement.LoadSceneMode.Additive);
+            while (!loadOperation.isDone)
+            {
+                await System.Threading.Tasks.Task.Yield();
+            }
+            UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByName(sceneNameLoaded));
+            UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(sceneNameUnloaded); // dont touch it works, probably..
+        }
+        LoadSceneAndUnloadPrevious();
+    }
+    void PlayButtonMenuSwap()
+    {
+        VersusFriendsButtonGameObject.SetActive(true);
+        ExitButtonGameObject.SetActive(false);
+        StoryModeGameObject.SetActive(true);
+        WIPOverlayGameObject.SetActive(true); 
+        VersusAIButtonGameObject.SetActive(true); 
+        BackButtonGameObject.SetActive(true); 
+        PlayButtonGameObject.SetActive(false); 
+        SettingsButtonGameObject.SetActive(false); 
+        BackButtonGameObject.SetActive(true);
+    }
+    void BackPlayButtonMenuSwap()
+    {
+        VersusFriendsButtonGameObject.SetActive(false); 
+        ExitButtonGameObject.SetActive(true); 
+        StoryModeGameObject.SetActive(false); 
+        WIPOverlayGameObject.SetActive(false); 
+        VersusAIButtonGameObject.SetActive(false); 
+        BackButtonGameObject.SetActive(false); 
+        PlayButtonGameObject.SetActive(true); 
+        SettingsButtonGameObject.SetActive(true); 
+        BackButtonGameObject.SetActive(false);
     }
 }

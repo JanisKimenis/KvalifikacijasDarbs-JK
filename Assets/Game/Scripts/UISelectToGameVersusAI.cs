@@ -6,7 +6,7 @@ public class UISelectToGameVersusAI : MonoBehaviour
 {
 
     public enum Difficulty { Easy = 0, Normal = 1, Hard = 2 }
-    public enum BattleBotType { None = -1, Explo1 = 0, Explo2 = 1, Mage1 = 2, Mage2 = 3 }
+    public enum BattleBotType { Random = -1, Explo1 = 0, Explo2 = 1, Mage1 = 2, Mage2 = 3 }
     public Difficulty selectedDifficulty;
     public BattleBotType playerSelectedBattleBotType;
     public BattleBotType enemySelectedBattleBotType;
@@ -16,7 +16,7 @@ public class UISelectToGameVersusAI : MonoBehaviour
     void Start()
     {
         selectedDifficulty = Difficulty.Normal; // Set default difficulty
-        playerSelectedBattleBotType = BattleBotType.None; // Set default player Battle Bot type
+        playerSelectedBattleBotType = BattleBotType.Random; // Set default player Battle Bot type
     }
 
     // Update is called once per frame
@@ -48,4 +48,11 @@ public class UISelectToGameVersusAI : MonoBehaviour
             enemySelectedBattleBotType = (Random.value > 0.5f) ? BattleBotType.Mage1 : BattleBotType.Mage2;
         }
     }
+    public void GetRandomPlayerBattleBotType()
+    {
+        // Randomly select a player Battle Bot type
+        playerSelectedBattleBotType = (BattleBotType)Random.Range(0, System.Enum.GetValues(typeof(BattleBotType)).Length-1);
+        Debug.Log("Random Player Selected Battle Bot: " + playerSelectedBattleBotType);
+    }
+
 }
